@@ -1,0 +1,24 @@
+img=imread('www.jpg');
+img=im2double(img);
+faced=vision.CascadeObjectDetector();
+bbox=step(faced,img);
+for i=1:size(bbox,1)
+    crop{i}=imcrop(img,bbox(i,:));
+end
+for i=1:length(crop)
+    crop{i}=imresize(crop{i},[200 200]);
+end
+iter=30;
+new=crop{i}-crop{2};
+new=new./iter;
+ 
+for i=3:iter
+    crop{3}=crop{3}+new;
+    imshow(crop{3});
+    pause(0.1);
+end
+for i=2:iter
+    crop{2}=crop{2}+new;
+    imshow(crop{2});
+    pause(0.1);
+end
